@@ -133,7 +133,6 @@
             line-height: 1.5;
         }
 
-        /* شاشة الفيديو السينمائية المباشرة */
         .cinema-screen-wrapper {
             position: relative;
             padding: 8px;
@@ -250,7 +249,7 @@
 
         <div class="cinema-screen-wrapper">
             <div class="screen-inner">
-                <video id="promo-video" controls poster="logo.png">
+                <video id="promo-video" controls playsinline preload="auto">
                     <source src="promo.mp4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
                 </video>
@@ -285,6 +284,14 @@
             const mainCard = document.getElementById("main-card");
             const video = document.getElementById("promo-video");
             
+            // تشغيل الصوت والفيديو مباشرة استجابة لنقرة المستخدم على زر فتح الظرف
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("تطلب الأمر تفاعلاً يدوياً لتشغيل الصوت");
+                });
+            }
+
             overlay.style.opacity = "0";
             overlay.style.visibility = "hidden";
             
@@ -292,7 +299,6 @@
                 mainCard.style.display = "block";
                 setTimeout(() => {
                     mainCard.style.opacity = "1";
-                    video.play(); // تشغيل الفيديو تلقائياً فور فتح الظرف
                 }, 50);
             }, 400);
         }
