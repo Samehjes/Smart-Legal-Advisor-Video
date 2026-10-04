@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Legal Advisor | الشرح التعريفي</title>
+    <title>Smart Legal Advisor | كتالوج خدمة محامي الطوارئ</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,6 +14,7 @@
             --gold-light: #F3E5AB;
             --text-light: #FFFFFF;
             --text-sub: #E0E0E0;
+            --accent-blue: #1C2541;
         }
 
         * {
@@ -34,6 +35,7 @@
             overflow-x: hidden;
         }
 
+        /* ---------------- غلاف الظرف ---------------- */
         #envelope-overlay {
             position: fixed;
             top: 0;
@@ -102,13 +104,14 @@
             box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
         }
 
+        /* ---------------- حاوية الكتالوج الرئيسية ---------------- */
         .container {
-            max-width: 800px;
+            max-width: 750px;
             width: 100%;
             background: var(--card-bg);
             border: 2px solid var(--gold);
             border-radius: 20px;
-            padding: 35px 20px;
+            padding: 30px 20px;
             text-align: center;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.2);
             display: none;
@@ -117,8 +120,8 @@
         }
 
         .logo {
-            width: 110px;
-            height: 110px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             border: 3px solid var(--gold);
             margin-bottom: 15px;
@@ -133,60 +136,160 @@
             line-height: 1.5;
         }
 
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            border-top: 1px solid var(--gold);
+            border-bottom: 1px solid var(--gold);
+            padding: 10px;
+            margin: 25px 0 15px 0;
+            color: var(--gold-light);
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        /* شاشة الفيديو المصغرة والملمومة */
         .cinema-screen-wrapper {
             position: relative;
-            padding: 8px;
+            max-width: 85%;
+            margin: 0 auto 20px auto;
+            padding: 6px;
             background: linear-gradient(145deg, #D4AF37, #553c00, #AA7C11);
-            border-radius: 16px;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4), 0 10px 30px rgba(0,0,0,0.8);
-            margin-bottom: 25px;
+            border-radius: 14px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), 0 10px 25px rgba(0,0,0,0.8);
         }
 
         .screen-inner {
             background: #000;
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
+            position: relative;
         }
 
         video {
             width: 100%;
-            height: auto;
+            max-height: 320px;
             display: block;
-            border-radius: 8px;
+            border-radius: 6px;
+            object-fit: contain;
         }
 
+        /* ---------------- الكتالوج وخطوات محامي الطوارئ ---------------- */
+        .catalog-intro {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: right;
+            line-height: 1.8;
+            font-size: 14px;
+            color: var(--text-sub);
+        }
+
+        .catalog-intro strong {
+            color: var(--gold);
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+            text-align: right;
+        }
+
+        .step-card {
+            background: rgba(11, 19, 43, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-right: 4px solid var(--gold);
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.15);
+            transform: translateX(-3px);
+        }
+
+        .step-title {
+            color: var(--gold);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-number {
+            background: var(--gold);
+            color: #000;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 13px;
+        }
+
+        .step-desc {
+            color: var(--text-sub);
+            font-size: 13.5px;
+            line-height: 1.7;
+            padding-right: 36px;
+        }
+
+        .payment-box {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px dashed var(--gold);
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--gold-light);
+        }
+
+        /* ---------------- الأزرار والدعم ---------------- */
         .support-card {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 25px;
+            padding: 15px;
+            margin-bottom: 20px;
             text-align: right;
             line-height: 1.8;
         }
 
         .support-card h3 {
             color: var(--gold);
-            font-size: 17px;
-            margin-bottom: 10px;
+            font-size: 16px;
+            margin-bottom: 8px;
         }
 
         .support-card p {
             color: var(--text-sub);
-            font-size: 14px;
+            font-size: 13.5px;
         }
 
         .stars-container {
             color: var(--gold);
-            font-size: 18px;
+            font-size: 16px;
             margin: 5px 0;
         }
 
         .action-buttons {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
         .btn {
@@ -194,11 +297,11 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 14px 20px;
+            padding: 12px 20px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 15px;
+            font-size: 14px;
             transition: 0.3s;
         }
 
@@ -217,12 +320,12 @@
             padding-top: 15px;
             color: var(--gold);
             font-weight: 700;
-            font-size: 17px;
+            font-size: 16px;
         }
 
         .footer span {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-sub);
             font-weight: 400;
             margin-top: 4px;
@@ -231,31 +334,118 @@
 </head>
 <body>
 
+    <!-- غلاف الظرف الاستفتائي -->
     <div id="envelope-overlay">
         <div class="envelope-card">
-            <div class="envelope-icon">🎬</div>
-            <div class="envelope-title">دعوة لمشاهدة فيديو الشرح التعريفي</div>
+            <div class="envelope-icon">🚨</div>
+            <div class="envelope-title">دليل استخدام خدمة محامي الطوارئ والشرح التعريفي</div>
             <div class="envelope-sender">مرسلة من الأستاذ / سامح فاروق كامل</div>
             <button class="open-btn" onclick="openCinema()">
-                <i class="fa-solid fa-play"></i> اضغط هنا لفتح شاشة العرض
+                <i class="fa-solid fa-play"></i> اضغط هنا لفتح الكتالوج والشاشة
             </button>
         </div>
     </div>
 
+    <!-- الحاوية الرئيسية للكتالوج -->
     <div class="container" id="main-card">
         <img src="logo.png" alt="Smart Legal Advisor Logo" class="logo" onerror="this.style.display='none'">
 
-        <h1>⚖️ العرض التعريفي لمنصة Smart Legal Advisor ⚖️</h1>
+        <h1>⚖️ الكتالوج الشرحي لمنصة Smart Legal Advisor ⚖️</h1>
+
+        <!-- القسم الأول: التسجيل والفيديو -->
+        <div class="section-header">
+            <i class="fa-solid fa-video"></i> أولاً: طريقة التسجيل بالتطبيق (فيديو)
+        </div>
 
         <div class="cinema-screen-wrapper">
             <div class="screen-inner">
                 <video id="promo-video" controls playsinline preload="auto">
                     <source src="promo.mp4" type="video/mp4">
+                    <source src="promo.MP4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
                 </video>
             </div>
         </div>
 
+        <!-- القسم الثاني: شرح خدمة محامي الطوارئ -->
+        <div class="section-header">
+            <i class="fa-solid fa-truck-medical"></i> ثانياً: كتالوج خدمة "محامي طوارئ"
+        </div>
+
+        <div class="catalog-intro">
+            <strong>🚨 ما هي خدمة محامي الطوارئ؟</strong><br>
+            هي خدمة قانونية فورية تتيح للمستخدم التواصل المباشر والسريع مع أقرب محامٍ في موقعه الجغرافي الحالي لإجراء أو موقف قانوني مفاجئ وسريع، لضمان الحماية القانونية التامة في وقتها.
+        </div>
+
+        <div class="steps-container">
+
+            <!-- الخطوة 1 -->
+            <div class="step-card">
+                <div class="step-title">
+                    <span class="step-number">1</span>
+                    <span>تفعيل خدمة الموقع (GPS) وتفعيل التواجد</span>
+                </div>
+                <div class="step-desc">
+                    يجب على جميع مستخدمي التطبيق تفعيل *خدمة الموقع (GPS)* على الهاتف.<br>
+                    • <strong>السادة المحامون:</strong> يتم الضغط على زر <strong>"التواجد"</strong> وفتح الخدمة لظهور الخريطة ورؤية أقرب المستخدمين لموقعهم، وانتظار استقبال طلبات الإجراءات القانونية.<br>
+                    • <strong>المستخدم طالب الخدمة:</strong> عند الاحتياج لمحامٍ فوراً، يتم اضغط زر <strong>"طلب محامي طوارئ"</strong> لتظهر الخريطة فوراً.
+                </div>
+            </div>
+
+            <!-- الخطوة 2 -->
+            <div class="step-card">
+                <div class="step-title">
+                    <span class="step-number">2</span>
+                    <span>اختيار المحامي وتحديد الإجراء</span>
+                </div>
+                <div class="step-desc">
+                    عند فتح الخريطة، يظهر السادة المحامون المتاحون بالقرب من موقعك أسفل الشاشة:<br>
+                    • يختار المستخدم المحامي المناسب من القائمة.<br>
+                    • يحدد *نوع الإجراء القانوني المطلوب* بدقة ثم يرسل الطلب.<br>
+                    • ينتظر المستخدم قبول الطلب من المحامي وتسعير الإجراء أوتوماتيكياً عبر التطبيق.
+                </div>
+            </div>
+
+            <!-- الخطوة 3 -->
+            <div class="step-card">
+                <div class="step-title">
+                    <span class="step-number">3</span>
+                    <span>دفع الرسوم وتأكيد المعاملة</span>
+                </div>
+                <div class="step-desc">
+                    بعد قبول الطلب والتسعير، يتم تحويل المبلغ المطلوب من خلال الطرق المتاحة داخل محفظة التطبيق:
+                    <div class="payment-box">
+                        💳 <strong>طرق الدفع المتاحة:</strong> التحويل عبر <strong>InstaPay (انستا باي)</strong> أو <strong>Orange Cash (أورنج كاش)</strong> على الرقم الموضح في محفظة التطبيق.<br>
+                        إرسال إشعار التحويل مرفقاً بـ <strong>(الرقم المرجعي - الوقت - التاريخ)</strong> إلى التطبيق للمطابقة وتأكيد الدفع.
+                    </div>
+                </div>
+            </div>
+
+            <!-- الخطوة 4 -->
+            <div class="step-card">
+                <div class="step-title">
+                    <span class="step-number">4</span>
+                    <span>بدء التواصل المباشر وإنهاء الإجراء</span>
+                </div>
+                <div class="step-desc">
+                    فور مطابقة وتأكيد الدفع، يتم تفعيل التواصل المباشر فوراً بين المحامي والمستخدم للتوجه وإنهاء الإجراء القانوني المطلوب على أسرع وجه.
+                </div>
+            </div>
+
+            <!-- الخطوة 5 -->
+            <div class="step-card">
+                <div class="step-title">
+                    <span class="step-number">5</span>
+                    <span>التقييم المتبادل بالنجوم ⭐</span>
+                </div>
+                <div class="step-desc">
+                    بعد إنهاء الخدمة بنجاح، يقوم كل من المحامي والمستخدم بتقييم الآخر بنظام النجوم (1 إلى 5 نجوم) لضمان جودة الخدمة وشفافية التقييمات لجميع مستخدمي التطبيق.
+                </div>
+            </div>
+
+        </div>
+
+        <!-- كارت الدعم والتفاعل -->
         <div class="support-card">
             <h3>📌 نرجو دعمكم الكريم:</h3>
             <p>1. نتشرف بمتابعتكم لصفحتنا الرسمية على الفيسبوك *(Follow)* ليصلكم كل جديد في مجال الخدمات القانونية الرقمية.</p>
@@ -263,6 +453,7 @@
             <div class="stars-container">⭐⭐⭐⭐⭐</div>
         </div>
 
+        <!-- أزرار التفاعل -->
         <div class="action-buttons">
             <a href="https://www.facebook.com" target="_blank" class="btn btn-facebook">
                 <i class="fa-brands fa-facebook-f"></i> 🎥 زيارة صفحتنا على الفيسبوك + متابعة
@@ -272,6 +463,7 @@
             </a>
         </div>
 
+        <!-- التوقيع والفوتر -->
         <div class="footer">
             ✍️ الأستاذ / سامح فاروق كامل
             <span>محامٍ ومستشار قانوني</span>
@@ -283,14 +475,6 @@
             const overlay = document.getElementById("envelope-overlay");
             const mainCard = document.getElementById("main-card");
             const video = document.getElementById("promo-video");
-            
-            // تشغيل الصوت والفيديو مباشرة استجابة لنقرة المستخدم على زر فتح الظرف
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.log("تطلب الأمر تفاعلاً يدوياً لتشغيل الصوت");
-                });
-            }
 
             overlay.style.opacity = "0";
             overlay.style.visibility = "hidden";
@@ -299,6 +483,14 @@
                 mainCard.style.display = "block";
                 setTimeout(() => {
                     mainCard.style.opacity = "1";
+                    // تشغيل الفيديو بسلاسة
+                    video.load();
+                    var playPromise = video.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(function(error) {
+                            console.log("استجابة المتصفح للتشغيل المباشر");
+                        });
+                    }
                 }, 50);
             }, 400);
         }
