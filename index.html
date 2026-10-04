@@ -177,7 +177,7 @@
             object-fit: contain;
         }
 
-        /* ---------------- الكتالوج وخطوات محامي الطوارئ ---------------- */
+        /* ---------------- تصميم نظام تقليب صفحات الكتالوج ---------------- */
         .catalog-intro {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(212, 175, 55, 0.3);
@@ -194,34 +194,47 @@
             color: var(--gold);
         }
 
-        .steps-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        .slider-wrapper {
+            position: relative;
             margin-bottom: 25px;
-            text-align: right;
+        }
+
+        .slider-container {
+            position: relative;
+            min-height: 220px;
+            overflow: hidden;
+            border-radius: 12px;
         }
 
         .step-card {
-            background: rgba(11, 19, 43, 0.8);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-right: 4px solid var(--gold);
-            border-radius: 10px;
-            padding: 15px;
-            transition: all 0.3s ease;
+            background: rgba(11, 19, 43, 0.95);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-right: 5px solid var(--gold);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: right;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s ease;
+            transform: translateX(30px);
         }
 
-        .step-card:hover {
-            border-color: var(--gold);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.15);
-            transform: translateX(-3px);
+        .step-card.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+            position: relative;
         }
 
         .step-title {
             color: var(--gold);
             font-size: 16px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -230,21 +243,21 @@
         .step-number {
             background: var(--gold);
             color: #000;
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .step-desc {
             color: var(--text-sub);
-            font-size: 13.5px;
-            line-height: 1.7;
-            padding-right: 36px;
+            font-size: 14px;
+            line-height: 1.8;
+            padding-right: 38px;
         }
 
         .payment-box {
@@ -252,9 +265,57 @@
             border: 1px dashed var(--gold);
             border-radius: 10px;
             padding: 12px;
-            margin-top: 8px;
+            margin-top: 10px;
             font-size: 13px;
             color: var(--gold-light);
+        }
+
+        /* أزرار ومؤشرات السلايدر */
+        .slider-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding: 0 5px;
+        }
+
+        .nav-btn {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .dots-container {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background: var(--gold);
+            width: 22px;
+            border-radius: 10px;
         }
 
         /* ---------------- الأزرار والدعم ---------------- */
@@ -367,7 +428,7 @@
             </div>
         </div>
 
-        <!-- القسم الثاني: شرح خدمة محامي الطوارئ -->
+        <!-- القسم الثاني: شرح خدمة محامي الطوارئ تقليب صفحات -->
         <div class="section-header">
             <i class="fa-solid fa-truck-medical"></i> ثانياً: كتالوج خدمة "محامي طوارئ"
         </div>
@@ -377,72 +438,88 @@
             هي خدمة قانونية فورية تتيح للمستخدم التواصل المباشر والسريع مع أقرب محامٍ في موقعه الجغرافي الحالي لإجراء أو موقف قانوني مفاجئ وسريع، لضمان الحماية القانونية التامة في وقتها.
         </div>
 
-        <div class="steps-container">
+        <!-- منطقة السلايدر لصفحات الكتالوج -->
+        <div class="slider-wrapper">
+            <div class="slider-container">
 
-            <!-- الخطوة 1 -->
-            <div class="step-card">
-                <div class="step-title">
-                    <span class="step-number">1</span>
-                    <span>تفعيل خدمة الموقع (GPS) وتفعيل التواجد</span>
-                </div>
-                <div class="step-desc">
-                    يجب على جميع مستخدمي التطبيق تفعيل *خدمة الموقع (GPS)* على الهاتف.<br>
-                    • <strong>السادة المحامون:</strong> يتم الضغط على زر <strong>"التواجد"</strong> وفتح الخدمة لظهور الخريطة ورؤية أقرب المستخدمين لموقعهم، وانتظار استقبال طلبات الإجراءات القانونية.<br>
-                    • <strong>المستخدم طالب الخدمة:</strong> عند الاحتياج لمحامٍ فوراً، يتم اضغط زر <strong>"طلب محامي طوارئ"</strong> لتظهر الخريطة فوراً.
-                </div>
-            </div>
-
-            <!-- الخطوة 2 -->
-            <div class="step-card">
-                <div class="step-title">
-                    <span class="step-number">2</span>
-                    <span>اختيار المحامي وتحديد الإجراء</span>
-                </div>
-                <div class="step-desc">
-                    عند فتح الخريطة، يظهر السادة المحامون المتاحون بالقرب من موقعك أسفل الشاشة:<br>
-                    • يختار المستخدم المحامي المناسب من القائمة.<br>
-                    • يحدد *نوع الإجراء القانوني المطلوب* بدقة ثم يرسل الطلب.<br>
-                    • ينتظر المستخدم قبول الطلب من المحامي وتسعير الإجراء أوتوماتيكياً عبر التطبيق.
-                </div>
-            </div>
-
-            <!-- الخطوة 3 -->
-            <div class="step-card">
-                <div class="step-title">
-                    <span class="step-number">3</span>
-                    <span>دفع الرسوم وتأكيد المعاملة</span>
-                </div>
-                <div class="step-desc">
-                    بعد قبول الطلب والتسعير، يتم تحويل المبلغ المطلوب من خلال الطرق المتاحة داخل محفظة التطبيق:
-                    <div class="payment-box">
-                        💳 <strong>طرق الدفع المتاحة:</strong> التحويل عبر <strong>InstaPay (انستا باي)</strong> أو <strong>Orange Cash (أورنج كاش)</strong> على الرقم الموضح في محفظة التطبيق.<br>
-                        إرسال إشعار التحويل مرفقاً بـ <strong>(الرقم المرجعي - الوقت - التاريخ)</strong> إلى التطبيق للمطابقة وتأكيد الدفع.
+                <!-- الصفحة 1 -->
+                <div class="step-card active">
+                    <div class="step-title">
+                        <span class="step-number">1</span>
+                        <span>تفعيل خدمة الموقع (GPS) وتفعيل التواجد</span>
+                    </div>
+                    <div class="step-desc">
+                        يجب على جميع مستخدمي التطبيق تفعيل *خدمة الموقع (GPS)* على الهاتف.<br>
+                        • <strong>السادة المحامون:</strong> يتم الضغط على زر <strong>"التواجد"</strong> وفتح الخدمة لظهور الخريطة ورؤية أقرب المستخدمين لموقعهم، وانتظار استقبال طلبات الإجراءات القانونية.<br>
+                        • <strong>المستخدم طالب الخدمة:</strong> عند الاحتياج لمحامٍ فوراً، يتم الضغط على زر <strong>"طلب محامي طوارئ"</strong> لتظهر الخريطة فوراً.
                     </div>
                 </div>
+
+                <!-- الصفحة 2 -->
+                <div class="step-card">
+                    <div class="step-title">
+                        <span class="step-number">2</span>
+                        <span>اختيار المحامي وتحديد الإجراء</span>
+                    </div>
+                    <div class="step-desc">
+                        عند فتح الخريطة، يظهر السادة المحامون المتاحون بالقرب من موقعك أسفل الشاشة:<br>
+                        • يختار المستخدم المحامي المناسب من القائمة.<br>
+                        • يحدد *نوع الإجراء القانوني المطلوب* بدقة ثم يرسل الطلب.<br>
+                        • ينتظر المستخدم قبول الطلب من المحامي وتسعير الإجراء أوتوماتيكياً عبر التطبيق.
+                    </div>
+                </div>
+
+                <!-- الصفحة 3 -->
+                <div class="step-card">
+                    <div class="step-title">
+                        <span class="step-number">3</span>
+                        <span>دفع الرسوم وتأكيد المعاملة</span>
+                    </div>
+                    <div class="step-desc">
+                        بعد قبول الطلب والتسعير، يتم تحويل المبلغ المطلوب من خلال الطرق المتاحة داخل محفظة التطبيق:
+                        <div class="payment-box">
+                            💳 <strong>طرق الدفع المتاحة:</strong> التحويل عبر <strong>InstaPay (انستا باي)</strong> أو <strong>Orange Cash (أورنج كاش)</strong> على الرقم الموضح في محفظة التطبيق.<br>
+                            إرسال إشعار التحويل مرفقاً بـ <strong>(الرقم المرجعي - الوقت - التاريخ)</strong> إلى التطبيق للمطابقة وتأكيد الدفع.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الصفحة 4 -->
+                <div class="step-card">
+                    <div class="step-title">
+                        <span class="step-number">4</span>
+                        <span>بدء التواصل المباشر وإنهاء الإجراء</span>
+                    </div>
+                    <div class="step-desc">
+                        فور مطابقة وتأكيد الدفع، يتم تفعيل التواصل المباشر فوراً بين المحامي والمستخدم للتوجه وإنهاء الإجراء القانوني المطلوب على أسرع وجه.
+                    </div>
+                </div>
+
+                <!-- الصفحة 5 -->
+                <div class="step-card">
+                    <div class="step-title">
+                        <span class="step-number">5</span>
+                        <span>التقييم المتبادل بالنجوم ⭐</span>
+                    </div>
+                    <div class="step-desc">
+                        بعد إنهاء الخدمة بنجاح، يقوم كل من المحامي والمستخدم بتقييم الآخر بنظام النجوم (1 إلى 5 نجوم) لضمان جودة الخدمة وشفافية التقييمات لجميع مستخدمي التطبيق.
+                    </div>
+                </div>
+
             </div>
 
-            <!-- الخطوة 4 -->
-            <div class="step-card">
-                <div class="step-title">
-                    <span class="step-number">4</span>
-                    <span>بدء التواصل المباشر وإنهاء الإجراء</span>
+            <!-- أزرار التنقل السفلية والتنقل اليدوي -->
+            <div class="slider-controls">
+                <button class="nav-btn" onclick="prevStep()"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="dots-container" id="dotsContainer">
+                    <span class="dot active" onclick="goToStep(0)"></span>
+                    <span class="dot" onclick="goToStep(1)"></span>
+                    <span class="dot" onclick="goToStep(2)"></span>
+                    <span class="dot" onclick="goToStep(3)"></span>
+                    <span class="dot" onclick="goToStep(4)"></span>
                 </div>
-                <div class="step-desc">
-                    فور مطابقة وتأكيد الدفع، يتم تفعيل التواصل المباشر فوراً بين المحامي والمستخدم للتوجه وإنهاء الإجراء القانوني المطلوب على أسرع وجه.
-                </div>
+                <button class="nav-btn" onclick="nextStep()"><i class="fa-solid fa-chevron-left"></i></button>
             </div>
-
-            <!-- الخطوة 5 -->
-            <div class="step-card">
-                <div class="step-title">
-                    <span class="step-number">5</span>
-                    <span>التقييم المتبادل بالنجوم ⭐</span>
-                </div>
-                <div class="step-desc">
-                    بعد إنهاء الخدمة بنجاح، يقوم كل من المحامي والمستخدم بتقييم الآخر بنظام النجوم (1 إلى 5 نجوم) لضمان جودة الخدمة وشفافية التقييمات لجميع مستخدمي التطبيق.
-                </div>
-            </div>
-
         </div>
 
         <!-- كارت الدعم والتفاعل -->
@@ -471,6 +548,11 @@
     </div>
 
     <script>
+        let currentStepIndex = 0;
+        const steps = document.querySelectorAll('.step-card');
+        const dots = document.querySelectorAll('.dot');
+        let autoSlideInterval = null;
+
         function openCinema() {
             const overlay = document.getElementById("envelope-overlay");
             const mainCard = document.getElementById("main-card");
@@ -483,7 +565,6 @@
                 mainCard.style.display = "block";
                 setTimeout(() => {
                     mainCard.style.opacity = "1";
-                    // تشغيل الفيديو بسلاسة
                     video.load();
                     var playPromise = video.play();
                     if (playPromise !== undefined) {
@@ -491,8 +572,51 @@
                             console.log("استجابة المتصفح للتشغيل المباشر");
                         });
                     }
+                    // بدء تقليب الشرايح تلقائياً كل 15 ثانية بعد فتح الصفحة
+                    startAutoSlide();
                 }, 50);
             }, 400);
+        }
+
+        function showStep(index) {
+            steps.forEach((step, i) => {
+                step.classList.remove('active');
+                dots[i].classList.remove('active');
+            });
+
+            currentStepIndex = index;
+            if (currentStepIndex >= steps.length) currentStepIndex = 0;
+            if (currentStepIndex < 0) currentStepIndex = steps.length - 1;
+
+            steps[currentStepIndex].classList.add('active');
+            dots[currentStepIndex].classList.add('active');
+        }
+
+        function nextStep() {
+            showStep(currentStepIndex + 1);
+            resetAutoSlide();
+        }
+
+        function prevStep() {
+            showStep(currentStepIndex - 1);
+            resetAutoSlide();
+        }
+
+        function goToStep(index) {
+            showStep(index);
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            // ضبط التقليب التلقائي كل 15 ثانية (15000 مللي ثانية)
+            autoSlideInterval = setInterval(() => {
+                showStep(currentStepIndex + 1);
+            }, 15000);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
         }
     </script>
 </body>
